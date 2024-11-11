@@ -1,0 +1,590 @@
+openapi: 3.0.0
+info:
+  title: Polish Scouts Registration API
+  description: API for managing the Polish Scouts organization.
+  version: 1.0.0
+
+paths:
+  /choragiew:
+    post:
+      summary: Create a new Chorągiew
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Choragiew'
+      responses:
+        '201':
+          description: Chorągiew created successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Choragiew'
+    get:
+      summary: Get a list of all Chorągiew
+      responses:
+        '200':
+          description: A list of Chorągiew
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Choragiew'
+
+  /choragiew/{choragiew_id}:
+    get:
+      summary: Get details of a specific Chorągiew
+      parameters:
+        - in: path
+          name: choragiew_id
+          schema:
+            type: integer
+          required: true
+      responses:
+        '200':
+          description: Chorągiew details
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Choragiew'
+
+  /hufiec:
+    post:
+      summary: Create a new Hufiec
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Hufiec'
+      responses:
+        '201':
+          description: Hufiec created successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Hufiec'
+    get:
+      summary: Get a list of all Hufiec
+      responses:
+        '200':
+          description: A list of Hufiec
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Hufiec'
+
+  /hufiec/{hufiec_id}:
+    get:
+      summary: Get details of a specific Hufiec
+      parameters:
+        - in: path
+          name: hufiec_id
+          schema:
+            type: integer
+          required: true
+      responses:
+        '200':
+          description: Hufiec details
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Hufiec'
+
+  /szczep:
+    post:
+      summary: Create a new Szczep
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Szczep'
+      responses:
+        '201':
+          description: Szczep created successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Szczep'
+    get:
+      summary: Get a list of all Szczep
+      responses:
+        '200':
+          description: A list of Szczep
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Szczep'
+
+  /druzyna:
+    post:
+      summary: Create a new Druzyna
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Druzyna'
+      responses:
+        '201':
+          description: Druzyna created successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Druzyna'
+    get:
+      summary: Get a list of all Druzyna
+      responses:
+        '200':
+          description: A list of Druzyna
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Druzyna'
+
+  /druzyna/{druzyna_id}:
+    get:
+      summary: Get details of a specific Druzyna
+      parameters:
+        - in: path
+          name: druzyna_id
+          schema:
+            type: integer
+          required: true
+      responses:
+        '200':
+          description: Druzyna details
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Druzyna'
+
+  /druzyna/rejestracje:
+    get:
+      summary: Get a list of all Druzyny Rejestracje
+      responses:
+        '200':
+          description: A list of Druzyny Rejestracje
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/DruzynaArkusz'
+
+  /druzyna/rejestracje/{druzyna_id}:
+    post:
+      summary: Create a new Druzyna Rejestracja
+      parameters:
+        - in: path
+          name: druzyna_id
+          schema:
+            type: integer
+          required: true
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DruzynaArkusz'
+      responses:
+        '201':
+          description: Druzyna Rejestracja created successfully
+    get:
+      summary: Get details of a specific Druzyna
+      parameters:
+        - in: path
+          name: druzyna_id
+          schema:
+            type: integer
+          required: true
+      responses:
+        '200':
+          description: Druzyna Rejestracja details
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DruzynaArkusz'
+
+  /person:
+    post:
+      summary: Create a new Person
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Person'
+      responses:
+        '201':
+          description: Person created successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Person'
+    get:
+      summary: Get a list of all people
+      responses:
+        '200':
+          description: A list of people
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Person'
+
+  /role-assignment:
+    post:
+      summary: Assign a role to a person
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RoleAssignment'
+      responses:
+        '201':
+          description: Role assigned successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RoleAssignment'
+
+components:
+  schemas:
+    DruzynaArkusz:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int32
+        uid:
+          type: integer
+          format: int32
+        jid:
+          type: integer
+          format: int32
+        status:
+          type: integer
+          format: int32
+        personalDetails:
+          $ref: '#/components/schemas/PersonalDetails'
+        troopInfo:
+          $ref: '#/components/schemas/TroopInfo'
+        address:
+          $ref: '#/components/schemas/Address'
+        contactInfo:
+          $ref: '#/components/schemas/ContactInfo'
+        stats:
+          $ref: '#/components/schemas/Stats'
+        courseInfo:
+          $ref: '#/components/schemas/CourseInfo'
+        assessment:
+          $ref: '#/components/schemas/Assessment'
+        activities:
+          type: array
+          items:
+            $ref: '#/components/schemas/Activity'
+        dataHufcowego:
+          type: string
+          format: date
+        opiniaKom:
+          type: string
+        dataKom:
+          type: string
+          format: date
+        rok:
+          type: integer
+          format: int32
+        iloscAsp:
+          type: integer
+          format: int32
+        dataRej:
+          type: string
+          format: date-time
+
+    PersonalDetails:
+      type: object
+      properties:
+        hufiec:
+          type: string
+          maxLength: 30
+        stopien:
+          type: string
+          maxLength: 30
+        imie:
+          type: string
+          maxLength: 30
+        nazwisko:
+          type: string
+          maxLength: 30
+
+    TroopInfo:
+      type: object
+      properties:
+        nazwaDruzyny:
+          type: string
+          maxLength: 50
+        patron:
+          type: string
+          maxLength: 30
+        miastoDruzyny:
+          type: string
+          maxLength: 30
+        miastoDruzynowego:
+          type: string
+          maxLength: 30
+        iloscZastepow:
+          type: integer
+          format: int32
+        czlonkowRady:
+          type: integer
+          format: int32
+
+    Address:
+      type: object
+      properties:
+        add1:
+          type: string
+          maxLength: 30
+        add2:
+          type: string
+          maxLength: 30
+        add3:
+          type: string
+          maxLength: 30
+        pcode:
+          type: string
+          maxLength: 10
+
+    ContactInfo:
+      type: object
+      properties:
+        telDom:
+          type: string
+          maxLength: 15
+        telPraca:
+          type: string
+          maxLength: 15
+        komurka:
+          type: string
+          maxLength: 15
+
+    Stats:
+      type: object
+      properties:
+        totalHarcerzy:
+          type: integer
+          format: int32
+        totalWedrownikow:
+          type: integer
+          format: int32
+        totalInstruktorzy:
+          type: integer
+          format: int32
+        iloscZbiorek:
+          type: integer
+          format: int32
+        iloscWycieczek:
+          type: integer
+          format: int32
+        # Add additional fields here as needed...
+
+    CourseInfo:
+      type: object
+      properties:
+        iloscKursow:
+          type: integer
+          format: int32
+        iloscNaKursow:
+          type: integer
+          format: int32
+        iloscBiwak:
+          type: integer
+          format: int32
+        iloscNaBiwak:
+          type: integer
+          format: int32
+        iloscZlaz:
+          type: integer
+          format: int32
+        iloscNaZlaz:
+          type: integer
+          format: int32
+        # Add additional fields here as needed...
+
+    Assessment:
+      type: object
+      properties:
+        ocenaProgramu:
+          type: integer
+          format: int32
+        ocenaAdmin:
+          type: integer
+          format: int32
+        ocenaSysZas:
+          type: integer
+          format: int32
+        ocenaKsiegi:
+          type: integer
+          format: int32
+        ocenaSpraw:
+          type: integer
+          format: int32
+        ocenaZbiorki:
+          type: integer
+          format: int32
+        ocenaHarce:
+          type: integer
+          format: int32
+        ocenaOboz:
+          type: integer
+          format: int32
+        ocenaWspol:
+          type: integer
+          format: int32
+        ocenaWykonane:
+          type: integer
+          format: int32
+
+    Activity:
+      type: object
+      properties:
+        type:
+          type: string
+        count:
+          type: integer
+          format: int32
+
+
+    Choragiew:
+      type: object
+      properties:
+        choragiew_id:
+          type: integer
+        country:
+          type: string
+          enum: [ UK, Kanada, USA ]
+        komendant_choragwi:
+          type: integer
+        komenda_count:
+          type: integer
+        created_at:
+          type: string
+          format: date
+
+    Hufiec:
+      type: object
+      properties:
+        hufiec_id:
+          type: integer
+        name:
+          type: string
+        choragiew_id:
+          type: integer
+        in_charge:
+          type: integer
+        komenda_count:
+          type: integer
+        created_at:
+          type: string
+          format: date
+
+    Szczep:
+      type: object
+      properties:
+        szczep_id:
+          type: integer
+        name:
+          type: string
+        hufiec_id:
+          type: integer
+        in_charge:
+          type: integer
+        druzyna_count:
+          type: integer
+        gromada_count:
+          type: integer
+        druzyna_wedrownikow_count:
+          type: integer
+        created_at:
+          type: string
+          format: date
+
+    Druzyna:
+      type: object
+      properties:
+        druzyna_id:
+          type: integer
+        name:
+          type: string
+        szczep_id:
+          type: integer
+        type:
+          type: string
+          enum: [ harcerze, gromada, wedrownikow ]
+        druzynowy:
+          type: integer
+        komenda_count:
+          type: integer
+        harcerze_count:
+          type: integer
+        created_at:
+          type: string
+          format: date
+
+    Person:
+      type: object
+      properties:
+        person_id:
+          type: integer
+        first_name:
+          type: string
+        last_name:
+          type: string
+        email:
+          type: string
+          format: email
+        phone:
+          type: string
+        date_of_birth:
+          type: string
+          format: date
+        address:
+          type: string
+        stopien:
+          type: string
+        created_at:
+          type: string
+          format: date
+
+    RoleAssignment:
+      type: object
+      properties:
+        role_assignment_id:
+          type: integer
+        person_id:
+          type: integer
+        unit_id:
+          type: integer
+        unit_type:
+          type: string
+          enum: [ choragiew, hufiec, szczep, druzyna ]
+        funkcja:
+          type: string
+        start_date:
+          type: string
+          format: date
+        end_date:
+          type: string
+          format: date
