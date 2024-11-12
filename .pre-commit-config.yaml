@@ -1,0 +1,38 @@
+exclude: |
+  (?x)^(
+      .idea/|
+      .mvn/|
+      .mvn/wrapper/|
+      mvnw.cmd|
+      mvnw
+  )$
+repos:
+  - repo: https://github.com/pre-commit/pre-commit-hooks
+    rev: v4.6.9
+    hooks:
+      - id: check-added-large-files
+      - id: check-executables-have-shebangs
+      - id: check-json
+      - id: check-merge-conflict
+      - id: check-shebang-scripts-are-executable
+      - id: check-symlinks
+      - id: check-xml
+      - id: check-yaml
+      - id: detect-aws-credentials
+        args: [ --allow-missing-credentials ]
+      - id: detect-private-key
+      - id: end-of-file-fixer
+      - id: mixed-line-ending
+        args: [ --fix=lf ]
+      - id: pretty-format-json
+        args: [ --no-sort-key,--autofix ]
+      - id: trailing-whitespace
+  - repo: https://github.com/macisamuele/language-formatters-pre-commit-hooks
+    rev: v2.14.0
+    hooks:
+      - id: pretty-format-java
+        args: [--autofix , --google-java-formatter-version, '1.22.0']
+  - repo: https://github.com/jorisroovers/gitlint
+    rev: v0.19.1
+    hooks:
+      - id: gitlint

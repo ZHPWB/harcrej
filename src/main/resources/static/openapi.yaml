@@ -7,7 +7,10 @@ info:
 paths:
   /choragiew:
     post:
+      tags:
+        - choragiew
       summary: Create a new Chorągiew
+      operationId: postChoragiew
       requestBody:
         required: true
         content:
@@ -17,15 +20,14 @@ paths:
       responses:
         '201':
           description: Chorągiew created successfully
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Choragiew'
     get:
-      summary: Get a list of all Chorągiew
+      tags:
+        - choragiew
+      summary: Get a list of all Chorągwi
+      operationId: getListOfChoragwi
       responses:
         '200':
-          description: A list of Chorągiew
+          description: A list of Chorągwi
           content:
             application/json:
               schema:
@@ -35,7 +37,10 @@ paths:
 
   /choragiew/{choragiew_id}:
     get:
+      tags:
+        - choragiew
       summary: Get details of a specific Chorągiew
+      operationId: getChoragiewById
       parameters:
         - in: path
           name: choragiew_id
@@ -49,10 +54,31 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Choragiew'
+        '404':
+          $ref: '#/components/responses/NotFound'
+    delete:
+      tags:
+        - choragiew
+      summary: Delete a specific Chorągiew
+      operationId: deleteChoragiew
+      parameters:
+        - in: path
+          name: choragiew_id
+          schema:
+            type: integer
+          required: true
+      responses:
+        '204':
+          description: Chorągiew deleted successfully
+        '404':
+          $ref: '#/components/responses/NotFound'
 
   /hufiec:
     post:
+      tags:
+        - hufiec
       summary: Create a new Hufiec
+      operationId: postHufiec
       requestBody:
         required: true
         content:
@@ -62,15 +88,14 @@ paths:
       responses:
         '201':
           description: Hufiec created successfully
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Hufiec'
     get:
-      summary: Get a list of all Hufiec
+      tags:
+        - hufiec
+      summary: Get a list of all Hufce
+      operationId: getListOfHufce
       responses:
         '200':
-          description: A list of Hufiec
+          description: A list of Hufce
           content:
             application/json:
               schema:
@@ -80,7 +105,10 @@ paths:
 
   /hufiec/{hufiec_id}:
     get:
+      tags:
+        - hufiec
       summary: Get details of a specific Hufiec
+      operationId: getHufiecById
       parameters:
         - in: path
           name: hufiec_id
@@ -94,10 +122,31 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Hufiec'
+        '404':
+          $ref: '#/components/responses/NotFound'
+    delete:
+      tags:
+        - hufiec
+      summary: Delete a specific Hufiec
+      operationId: deleteHufiec
+      parameters:
+        - in: path
+          name: hufiec_id
+          schema:
+            type: integer
+          required: true
+      responses:
+        '204':
+          description: Hufiec deleted successfully
+        '404':
+          $ref: '#/components/responses/NotFound'
 
   /szczep:
     post:
+      tags:
+        - szczep
       summary: Create a new Szczep
+      operationId: postSzczep
       requestBody:
         required: true
         content:
@@ -107,12 +156,11 @@ paths:
       responses:
         '201':
           description: Szczep created successfully
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Szczep'
     get:
+      tags:
+        - szczep
       summary: Get a list of all Szczep
+      operationId: getListOfSzczep
       responses:
         '200':
           description: A list of Szczep
@@ -123,9 +171,50 @@ paths:
                 items:
                   $ref: '#/components/schemas/Szczep'
 
+  /szczep/{szczep_id}:
+    get:
+      tags:
+        - szczep
+      summary: Get details of a specific Szczep
+      operationId: getSzczepById
+      parameters:
+        - in: path
+          name: szczep_id
+          schema:
+            type: integer
+          required: true
+      responses:
+        '200':
+          description: Szczep details
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Szczep'
+        '404':
+          $ref: '#/components/responses/NotFound'
+    delete:
+      tags:
+        - szczep
+      summary: Delete a specific Szczep
+      operationId: deleteSzczep
+      parameters:
+        - in: path
+          name: szczep_id
+          schema:
+            type: integer
+          required: true
+      responses:
+        '204':
+          description: Szczep deleted successfully
+        '404':
+          $ref: '#/components/responses/NotFound'
+
   /druzyna:
     post:
+      tags:
+        - druzyna
       summary: Create a new Druzyna
+      operationId: postDruzyna
       requestBody:
         required: true
         content:
@@ -140,7 +229,10 @@ paths:
               schema:
                 $ref: '#/components/schemas/Druzyna'
     get:
+      tags:
+        - druzyna
       summary: Get a list of all Druzyna
+      operationId: getListOfDruzyna
       responses:
         '200':
           description: A list of Druzyna
@@ -153,7 +245,10 @@ paths:
 
   /druzyna/{druzyna_id}:
     get:
+      tags:
+        - druzyna
       summary: Get details of a specific Druzyna
+      operationId: getDruzynaById
       parameters:
         - in: path
           name: druzyna_id
@@ -167,10 +262,31 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Druzyna'
+        '404':
+          $ref: '#/components/responses/NotFound'
+    delete:
+      tags:
+        - druzyna
+      summary: Delete a specific Druzyna
+      operationId: deleteDruzyna
+      parameters:
+        - in: path
+          name: druzyna_id
+          schema:
+            type: integer
+          required: true
+      responses:
+        '204':
+          description: Druzyna deleted successfully
+        '404':
+          $ref: '#/components/responses/NotFound'
 
   /druzyna/rejestracje:
     get:
+      tags:
+        - rejestracje
       summary: Get a list of all Druzyny Rejestracje
+      operationId: getListOfDruzynaRejestracje
       responses:
         '200':
           description: A list of Druzyny Rejestracje
@@ -183,7 +299,10 @@ paths:
 
   /druzyna/rejestracje/{druzyna_id}:
     post:
+      tags:
+        - rejestracje
       summary: Create a new Druzyna Rejestracja
+      operationId: postDruzynaRejestracja
       parameters:
         - in: path
           name: druzyna_id
@@ -199,8 +318,13 @@ paths:
       responses:
         '201':
           description: Druzyna Rejestracja created successfully
+        '404':
+          $ref: '#/components/responses/NotFound'
     get:
-      summary: Get details of a specific Druzyna
+      tags:
+        - rejestracje
+      summary: Get details of a specific Druzyna Rejestracja
+      operationId: getDruzynaRejestracjaById
       parameters:
         - in: path
           name: druzyna_id
@@ -214,10 +338,15 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/DruzynaArkusz'
+        '404':
+          $ref: '#/components/responses/NotFound'
 
   /person:
     post:
+      tags:
+        - person
       summary: Create a new Person
+      operationId: postPerson
       requestBody:
         required: true
         content:
@@ -232,7 +361,10 @@ paths:
               schema:
                 $ref: '#/components/schemas/Person'
     get:
+      tags:
+        - person
       summary: Get a list of all people
+      operationId: getListOfPeople
       responses:
         '200':
           description: A list of people
@@ -246,6 +378,7 @@ paths:
   /role-assignment:
     post:
       summary: Assign a role to a person
+      operationId: postRoleAssignment
       requestBody:
         required: true
         content:
@@ -259,6 +392,7 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/RoleAssignment'
+
 
 components:
   schemas:
@@ -588,3 +722,56 @@ components:
         end_date:
           type: string
           format: date
+
+    ErrorResponse:
+      required:
+        - message
+        - errors
+      type: object
+      properties:
+        message:
+          type: string
+          example: Bad request
+        errors:
+          type: array
+          description: Validation/ error messages
+          items:
+            type: string
+            example: Szczep id not found
+  responses:
+    NotFound:
+      description: Not found
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/ErrorResponse"
+    InternalServerError:
+      description: Internal server error
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/ErrorResponse"
+    BadRequest:
+      description: Bad request
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/ErrorResponse"
+    Unauthorized:
+      description: Unauthorized
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/ErrorResponse"
+    Forbidden:
+      description: Forbidden
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/ErrorResponse"
+    Conflict:
+      description: Conflict
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/ErrorResponse"
