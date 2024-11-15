@@ -1,11 +1,14 @@
 openapi: 3.0.0
 info:
-  title: Polish Scouts Registration API
+  title: HARCREJ
   description: API for managing the Polish Scouts organization.
   version: 1.0.0
+servers:
+  - url: http://localhost:8080
+    description: Generated server url
 
 paths:
-  /choragiew:
+  /api/v1/choragiew:
     post:
       tags:
         - choragiew
@@ -35,7 +38,7 @@ paths:
                 items:
                   $ref: '#/components/schemas/Choragiew'
 
-  /choragiew/{choragiew_id}:
+  /api/v1/choragiew/{choragiew_id}:
     get:
       tags:
         - choragiew
@@ -73,7 +76,7 @@ paths:
         '404':
           $ref: '#/components/responses/NotFound'
 
-  /hufiec:
+  /api/v1/hufiec:
     post:
       tags:
         - hufiec
@@ -103,7 +106,7 @@ paths:
                 items:
                   $ref: '#/components/schemas/Hufiec'
 
-  /hufiec/{hufiec_id}:
+  /api/v1/hufiec/{hufiec_id}:
     get:
       tags:
         - hufiec
@@ -141,7 +144,7 @@ paths:
         '404':
           $ref: '#/components/responses/NotFound'
 
-  /szczep:
+  /api/v1/szczep:
     post:
       tags:
         - szczep
@@ -171,7 +174,7 @@ paths:
                 items:
                   $ref: '#/components/schemas/Szczep'
 
-  /szczep/{szczep_id}:
+  /api/v1/szczep/{szczep_id}:
     get:
       tags:
         - szczep
@@ -209,7 +212,7 @@ paths:
         '404':
           $ref: '#/components/responses/NotFound'
 
-  /druzyna:
+  /api/v1/druzyna:
     post:
       tags:
         - druzyna
@@ -224,10 +227,6 @@ paths:
       responses:
         '201':
           description: Druzyna created successfully
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Druzyna'
     get:
       tags:
         - druzyna
@@ -243,7 +242,7 @@ paths:
                 items:
                   $ref: '#/components/schemas/Druzyna'
 
-  /druzyna/{druzyna_id}:
+  /api/v1/druzyna/{druzyna_id}:
     get:
       tags:
         - druzyna
@@ -280,8 +279,31 @@ paths:
           description: Druzyna deleted successfully
         '404':
           $ref: '#/components/responses/NotFound'
+    put:
+      summary: Update a Druzyna
+      operationId: updateDruzyna
+      tags:
+        - druzyna
+      parameters:
+        - in: path
+          name: druzyna_id
+          schema:
+            type: integer
+          required: true
+      requestBody:
+        description: Updated Druzyna
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Druzyna"
+      responses:
+        "200":
+          description: Druzyna updated successfully
+        "404":
+          $ref: "#/components/responses/NotFound"
 
-  /druzyna/rejestracje:
+  /api/v1/druzyna/rejestracje:
     get:
       tags:
         - rejestracje
@@ -297,7 +319,7 @@ paths:
                 items:
                   $ref: '#/components/schemas/DruzynaArkusz'
 
-  /druzyna/rejestracje/{druzyna_id}:
+  /api/v1/druzyna/rejestracje/{druzyna_id}:
     post:
       tags:
         - rejestracje
@@ -341,7 +363,7 @@ paths:
         '404':
           $ref: '#/components/responses/NotFound'
 
-  /person:
+  /api/v1/person:
     post:
       tags:
         - person
@@ -375,7 +397,7 @@ paths:
                 items:
                   $ref: '#/components/schemas/Person'
 
-  /role-assignment:
+  /api/v1/role-assignment:
     post:
       summary: Assign a role to a person
       operationId: postRoleAssignment
@@ -658,24 +680,12 @@ components:
     Druzyna:
       type: object
       properties:
-        druzyna_id:
-          type: integer
         name:
           type: string
-        szczep_id:
-          type: integer
-        type:
+        areaOfOperation:
           type: string
-          enum: [ harcerze, gromada, wedrownikow ]
-        druzynowy:
-          type: integer
-        komenda_count:
-          type: integer
-        harcerze_count:
-          type: integer
-        created_at:
+        personInCharge:
           type: string
-          format: date
 
     Person:
       type: object
