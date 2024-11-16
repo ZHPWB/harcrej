@@ -21,6 +21,7 @@ public class ChoragiewServiceImpl implements ChoragiewService {
     @Override
     public void createChoragiew(Choragiew choragiew) {
         var choragiewEntity = choragiewMapper.mapToEntity(choragiew);
+        log.info("mapping");
         choragiewRepository.save(choragiewEntity);
     }
 
