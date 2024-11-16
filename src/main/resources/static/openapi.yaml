@@ -75,6 +75,29 @@ paths:
           description: Chorągiew deleted successfully
         '404':
           $ref: '#/components/responses/NotFound'
+    put:
+      summary: Update a Choragiew
+      operationId: updateChoragiew
+      tags:
+        - choragiew
+      parameters:
+        - in: path
+          name: choragiew_id
+          schema:
+            type: integer
+          required: true
+      requestBody:
+        description: Updated Choragiew
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Choragiew"
+      responses:
+        "200":
+          description: Choragiew updated successfully
+        "404":
+          $ref: "#/components/responses/NotFound"
 
   /api/v1/hufiec:
     post:
@@ -143,6 +166,29 @@ paths:
           description: Hufiec deleted successfully
         '404':
           $ref: '#/components/responses/NotFound'
+    put:
+      summary: Update a Hufiec
+      operationId: updateHufiec
+      tags:
+        - hufiec
+      parameters:
+        - in: path
+          name: hufiec_id
+          schema:
+            type: integer
+          required: true
+      requestBody:
+        description: Updated Hufiec
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Hufiec"
+      responses:
+        "200":
+          description: Hufiec updated successfully
+        "404":
+          $ref: "#/components/responses/NotFound"
 
   /api/v1/szczep:
     post:
@@ -211,6 +257,29 @@ paths:
           description: Szczep deleted successfully
         '404':
           $ref: '#/components/responses/NotFound'
+    put:
+      summary: Update a Szczep
+      operationId: updateSzczep
+      tags:
+        - szczep
+      parameters:
+        - in: path
+          name: szczep_id
+          schema:
+            type: integer
+          required: true
+      requestBody:
+        description: Updated Szczep
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Szczep"
+      responses:
+        "200":
+          description: Szczep updated successfully
+        "404":
+          $ref: "#/components/responses/NotFound"
 
   /api/v1/druzyna:
     post:
@@ -300,6 +369,188 @@ paths:
       responses:
         "200":
           description: Druzyna updated successfully
+        "404":
+          $ref: "#/components/responses/NotFound"
+
+  /api/v1/gromada:
+    post:
+      tags:
+        - gromada
+      summary: Create a new Gromada
+      operationId: postGromada
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Gromada'
+      responses:
+        '201':
+          description: Gromada created successfully
+    get:
+      tags:
+        - gromada
+      summary: Get a list of all Gromady
+      operationId: getListOfGromady
+      responses:
+        '200':
+          description: A list of Gromady
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Gromada'
+
+  /api/v1/gromada/{gromada_id}:
+    get:
+      tags:
+        - gromada
+      summary: Get details of a specific Gromada
+      operationId: getGromadaById
+      parameters:
+        - in: path
+          name: gromada_id
+          schema:
+            type: integer
+          required: true
+      responses:
+        '200':
+          description: Gromada details
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Gromada'
+        '404':
+          $ref: '#/components/responses/NotFound'
+    delete:
+      tags:
+        - gromada
+      summary: Delete a specific Gromada
+      operationId: deleteGromada
+      parameters:
+        - in: path
+          name: gromada_id
+          schema:
+            type: integer
+          required: true
+      responses:
+        '204':
+          description: Gromada deleted successfully
+        '404':
+          $ref: '#/components/responses/NotFound'
+    put:
+      summary: Update a Gromada
+      operationId: updateGromada
+      tags:
+        - gromada
+      parameters:
+        - in: path
+          name: gromada_id
+          schema:
+            type: integer
+          required: true
+      requestBody:
+        description: Updated Gromada
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Gromada"
+      responses:
+        "200":
+          description: Gromada updated successfully
+        "404":
+          $ref: "#/components/responses/NotFound"
+
+  /api/v1/wedrownicy:
+    post:
+      tags:
+        - wedrownicy
+      summary: Create a new Wedrownicy
+      operationId: postWedrownicy
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Wedrownicy'
+      responses:
+        '201':
+          description: Wedrownicy created successfully
+    get:
+      tags:
+        - wedrownicy
+      summary: Get a list of all Wedrownicy
+      operationId: getListOfWedrownicy
+      responses:
+        '200':
+          description: A list of Wedrownicy
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Wedrownicy'
+
+  /api/v1/wedrownicy/{wedrownicy_id}:
+    get:
+      tags:
+        - wedrownicy
+      summary: Get details of a specific Wedrownicy
+      operationId: getWedrownicyById
+      parameters:
+        - in: path
+          name: wedrownicy_id
+          schema:
+            type: integer
+          required: true
+      responses:
+        '200':
+          description: Wedrownicy details
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Wedrownicy'
+        '404':
+          $ref: '#/components/responses/NotFound'
+    delete:
+      tags:
+        - wedrownicy
+      summary: Delete a specific Wedrownicy
+      operationId: deleteWedrownicy
+      parameters:
+        - in: path
+          name: wedrownicy_id
+          schema:
+            type: integer
+          required: true
+      responses:
+        '204':
+          description: Wedrownicy deleted successfully
+        '404':
+          $ref: '#/components/responses/NotFound'
+    put:
+      summary: Update a Wedrownicy
+      operationId: updateWedrownicy
+      tags:
+        - wedrownicy
+      parameters:
+        - in: path
+          name: wedrownicy_id
+          schema:
+            type: integer
+          required: true
+      requestBody:
+        description: Updated Wedrownicy
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Wedrownicy"
+      responses:
+        "200":
+          description: Wedrownicy updated successfully
         "404":
           $ref: "#/components/responses/NotFound"
 
@@ -626,58 +877,90 @@ components:
     Choragiew:
       type: object
       properties:
-        choragiew_id:
-          type: integer
-        country:
+        name:
           type: string
-          enum: [ UK, Kanada, USA ]
-        komendant_choragwi:
-          type: integer
-        komenda_count:
-          type: integer
-        created_at:
+        areaOfOperation:
           type: string
-          format: date
+        personInCharge:
+          type: string
+    #        country:
+    #          type: string
+    #          enum: [ UK, Kanada, USA ]
+    #        komendant_choragwi:
+    #          type: integer
+    #        komenda_count:
+    #          type: integer
+    #        created_at:
+    #          type: string
+    #          format: date
 
     Hufiec:
       type: object
       properties:
-        hufiec_id:
-          type: integer
         name:
           type: string
-        choragiew_id:
-          type: integer
-        in_charge:
-          type: integer
-        komenda_count:
-          type: integer
-        created_at:
+        areaOfOperation:
           type: string
-          format: date
+        personInCharge:
+          type: string
+    #        name:
+    #          type: string
+    #        choragiew_id:
+    #          type: integer
+    #        in_charge:
+    #          type: integer
+    #        komenda_count:
+    #          type: integer
+    #        created_at:
+    #          type: string
+    #          format: date
 
     Szczep:
       type: object
       properties:
-        szczep_id:
-          type: integer
         name:
           type: string
-        hufiec_id:
-          type: integer
-        in_charge:
-          type: integer
-        druzyna_count:
-          type: integer
-        gromada_count:
-          type: integer
-        druzyna_wedrownikow_count:
-          type: integer
-        created_at:
+        areaOfOperation:
           type: string
-          format: date
+        personInCharge:
+          type: string
+    #        name:
+    #          type: string
+    #        hufiec_id:
+    #          type: integer
+    #        in_charge:
+    #          type: integer
+    #        druzyna_count:
+    #          type: integer
+    #        gromada_count:
+    #          type: integer
+    #        druzyna_wedrownikow_count:
+    #          type: integer
+    #        created_at:
+    #          type: string
+    #          format: date
 
     Druzyna:
+      type: object
+      properties:
+        name:
+          type: string
+        areaOfOperation:
+          type: string
+        personInCharge:
+          type: string
+
+    Wedrownicy:
+      type: object
+      properties:
+        name:
+          type: string
+        areaOfOperation:
+          type: string
+        personInCharge:
+          type: string
+
+    Gromada:
       type: object
       properties:
         name:
