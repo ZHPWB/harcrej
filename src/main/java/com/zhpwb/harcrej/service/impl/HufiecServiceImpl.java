@@ -41,9 +41,11 @@ public class HufiecServiceImpl implements HufiecService {
         var existingHufiecEntity = hufiecRepository.findById(hufiecId).orElse(null);
 
         if (existingHufiecEntity != null) {
-            existingHufiecEntity.setName(updatedHufiecDTO.getName());
-            existingHufiecEntity.setAreaOfOperation(updatedHufiecDTO.getAreaOfOperation());
-            existingHufiecEntity.setPersonInCharge(updatedHufiecDTO.getPersonInCharge());
+            var updatedEntity = hufiecMapper.mapToEntity(updatedHufiecDTO);
+
+            existingHufiecEntity.setName(updatedEntity.getName());
+            existingHufiecEntity.setHufcowy(updatedEntity.getHufcowy());
+            existingHufiecEntity.setAreaOfOperation(updatedEntity.getAreaOfOperation());
 
             hufiecRepository.save(existingHufiecEntity);
 

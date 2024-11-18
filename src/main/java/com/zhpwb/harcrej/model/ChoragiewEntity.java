@@ -1,10 +1,9 @@
 package com.zhpwb.harcrej.model;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import lombok.Data;
+
+import java.util.List;
 
 @Entity
 @Table(name = "choragiew")
@@ -14,7 +13,10 @@ public class ChoragiewEntity {
     @GeneratedValue
     @Id
     private int choragiewId;
-    private String name;
-    private String areaOfOperation;
-    private String personInCharge;
+    private CountryEntity country;
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "komendant_choragwi_id")
+    private PersonEntity komendantChoragwi;
+    @OneToMany(mappedBy = "choragiew", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<HufiecEntity> hufceList;
 }

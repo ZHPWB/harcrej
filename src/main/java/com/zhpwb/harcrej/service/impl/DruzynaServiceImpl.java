@@ -75,7 +75,7 @@ public class DruzynaServiceImpl implements DruzynaService {
         if (existingDruzynaEntity != null) {
             var updatedEntity = druzynaMapper.mapToEntity(updatedDruzynaDTO);
 
-            existingDruzynaEntity.setSzczepId(updatedEntity.getSzczepId());
+            existingDruzynaEntity.setSzczep(updatedEntity.getSzczep());
             existingDruzynaEntity.setName(updatedEntity.getName());
             existingDruzynaEntity.setAddressOfOperation(updatedEntity.getAddressOfOperation());
             existingDruzynaEntity.setDruzynowy(updatedEntity.getDruzynowy());

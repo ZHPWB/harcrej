@@ -41,9 +41,11 @@ public class SzczepServiceImpl implements SzczepService {
         var existingSzczepEntity = szczepRepository.findById(szczepId).orElse(null);
 
         if (existingSzczepEntity != null) {
-            existingSzczepEntity.setName(updatedSzczepDTO.getName());
-            existingSzczepEntity.setAreaOfOperation(updatedSzczepDTO.getAreaOfOperation());
-            existingSzczepEntity.setPersonInCharge(updatedSzczepDTO.getPersonInCharge());
+            var updatedEntity = szczepMapper.mapToEntity(updatedSzczepDTO);
+
+            existingSzczepEntity.setName(updatedEntity.getName());
+            existingSzczepEntity.setAreaOfOperation(updatedEntity.getAreaOfOperation());
+            existingSzczepEntity.setSzczepowy(updatedEntity.getSzczepowy());
 
             szczepRepository.save(existingSzczepEntity);
 

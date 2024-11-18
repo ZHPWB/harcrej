@@ -1,12 +1,15 @@
 package com.zhpwb.harcrej.service.impl;
 
 import com.zhpwb.harcrej.mapper.ChoragiewMapper;
+import com.zhpwb.harcrej.mapper.PersonMapper;
 import com.zhpwb.harcrej.model.Choragiew;
 import com.zhpwb.harcrej.respository.ChoragiewRepository;
+import com.zhpwb.harcrej.respository.PersonRepository;
 import com.zhpwb.harcrej.service.ChoragiewService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -16,11 +19,23 @@ import java.util.List;
 public class ChoragiewServiceImpl implements ChoragiewService {
 
     private final ChoragiewRepository choragiewRepository;
+    private final PersonRepository personRepository;
     private final ChoragiewMapper choragiewMapper;
+    private final PersonMapper personMapper;
 
     @Override
+    @Transactional
     public void createChoragiew(Choragiew choragiew) {
         var choragiewEntity = choragiewMapper.mapToEntity(choragiew);
+
+        if (choragiew.getKomendantChoragwi() != null) {
+            var komendantChoragwiEntity = personMapper.mapToEntity(choragiew.getKomendantChoragwi());
+
+            if (komendantChoragwiEntity.getPersonId() == null) {
+                personRepository.save(komendantChoragwiEntity);
+            }
+            choragiewEntity.setKomendantChoragwi(komendantChoragwiEntity);
+        }
         choragiewRepository.save(choragiewEntity);
     }
 
@@ -41,9 +56,11 @@ public class ChoragiewServiceImpl implements ChoragiewService {
         var existingChoragiewEntity = choragiewRepository.findById(choragiewId).orElse(null);
 
         if (existingChoragiewEntity != null) {
-            existingChoragiewEntity.setName(updatedChoragiewDTO.getName());
-            existingChoragiewEntity.setAreaOfOperation(updatedChoragiewDTO.getAreaOfOperation());
-            existingChoragiewEntity.setPersonInCharge(updatedChoragiewDTO.getPersonInCharge());
+            var updatedEntity = choragiewMapper.mapToEntity(updatedChoragiewDTO);
+
+            existingChoragiewEntity.setCountry(updatedEntity.getCountry());
+            existingChoragiewEntity.setKomendantChoragwi(updatedEntity.getKomendantChoragwi());
+            existingChoragiewEntity.setHufceList(updatedEntity.getHufceList());
 
             choragiewRepository.save(existingChoragiewEntity);
 

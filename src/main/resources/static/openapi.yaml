@@ -372,206 +372,12 @@ paths:
         "404":
           $ref: "#/components/responses/NotFound"
 
-  /api/v1/gromada:
-    post:
-      tags:
-        - gromada
-      summary: Create a new Gromada
-      operationId: postGromada
-      requestBody:
-        required: true
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/Gromada'
-      responses:
-        '201':
-          description: Gromada created successfully
-    get:
-      tags:
-        - gromada
-      summary: Get a list of all Gromady
-      operationId: getListOfGromady
-      responses:
-        '200':
-          description: A list of Gromady
-          content:
-            application/json:
-              schema:
-                type: array
-                items:
-                  $ref: '#/components/schemas/Gromada'
-
-  /api/v1/gromada/{gromadaId}:
-    get:
-      tags:
-        - gromada
-      summary: Get details of a specific Gromada
-      operationId: getGromadaById
-      parameters:
-        - in: path
-          name: gromadaId
-          schema:
-            type: integer
-          required: true
-      responses:
-        '200':
-          description: Gromada details
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Gromada'
-        '404':
-          $ref: '#/components/responses/NotFound'
-    delete:
-      tags:
-        - gromada
-      summary: Delete a specific Gromada
-      operationId: deleteGromada
-      parameters:
-        - in: path
-          name: gromadaId
-          schema:
-            type: integer
-          required: true
-      responses:
-        '204':
-          description: Gromada deleted successfully
-        '404':
-          $ref: '#/components/responses/NotFound'
-    put:
-      summary: Update a Gromada
-      operationId: updateGromada
-      tags:
-        - gromada
-      parameters:
-        - in: path
-          name: gromadaId
-          schema:
-            type: integer
-          required: true
-      requestBody:
-        description: Updated Gromada
-        required: true
-        content:
-          application/json:
-            schema:
-              $ref: "#/components/schemas/Gromada"
-      responses:
-        "200":
-          description: Gromada updated successfully
-        "404":
-          $ref: "#/components/responses/NotFound"
-
-  /api/v1/wedrownicy:
-    post:
-      tags:
-        - wedrownicy
-      summary: Create a new Wedrownicy
-      operationId: postWedrownicy
-      requestBody:
-        required: true
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/Wedrownicy'
-      responses:
-        '201':
-          description: Wedrownicy created successfully
-    get:
-      tags:
-        - wedrownicy
-      summary: Get a list of all Wedrownicy
-      operationId: getListOfWedrownicy
-      responses:
-        '200':
-          description: A list of Wedrownicy
-          content:
-            application/json:
-              schema:
-                type: array
-                items:
-                  $ref: '#/components/schemas/Wedrownicy'
-
-  /api/v1/wedrownicy/{wedrownicyId}:
-    get:
-      tags:
-        - wedrownicy
-      summary: Get details of a specific Wedrownicy
-      operationId: getWedrownicyById
-      parameters:
-        - in: path
-          name: wedrownicyId
-          schema:
-            type: integer
-          required: true
-      responses:
-        '200':
-          description: Wedrownicy details
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Wedrownicy'
-        '404':
-          $ref: '#/components/responses/NotFound'
-    delete:
-      tags:
-        - wedrownicy
-      summary: Delete a specific Wedrownicy
-      operationId: deleteWedrownicy
-      parameters:
-        - in: path
-          name: wedrownicyId
-          schema:
-            type: integer
-          required: true
-      responses:
-        '204':
-          description: Wedrownicy deleted successfully
-        '404':
-          $ref: '#/components/responses/NotFound'
-    put:
-      summary: Update a Wedrownicy
-      operationId: updateWedrownicy
-      tags:
-        - wedrownicy
-      parameters:
-        - in: path
-          name: wedrownicyId
-          schema:
-            type: integer
-          required: true
-      requestBody:
-        description: Updated Wedrownicy
-        required: true
-        content:
-          application/json:
-            schema:
-              $ref: "#/components/schemas/Wedrownicy"
-      responses:
-        "200":
-          description: Wedrownicy updated successfully
-        "404":
-          $ref: "#/components/responses/NotFound"
-
-  /api/v1/druzyna/rejestracje:
-    get:
-      tags:
-        - rejestracje
-      summary: Get a list of all Druzyny Rejestracje
-      operationId: getListOfDruzynaRejestracje
-      responses:
-        '200':
-          description: A list of Druzyny Rejestracje
-          content:
-            application/json:
-              schema:
-                type: array
-                items:
-                  $ref: '#/components/schemas/Registration'
 
   /api/v1/druzyna/rejestracje/{druzynaId}:
     post:
+      operationId: postDruzynaRejestracje
+      tags:
+        - rejestracje
       summary: Register yearly details for a specific troop
       description: Allows a troop leader to register or update the annual details for their troop (Druzyna).
       parameters:
@@ -586,30 +392,150 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/Registration'
+              $ref: '#/components/schemas/Rejestracje'
       responses:
         '201':
-          description: Druzyna Rejestracja created successfully
+          description: Druzyna rejestracja created successfully
         '404':
           $ref: '#/components/responses/NotFound'
     get:
+      operationId: getDruzynaRejestracje
       tags:
         - rejestracje
-      summary: Get details of a specific Druzyna Rejestracja
-      operationId: getDruzynaRejestracjaById
+      summary: Get Druzyna registration
+      description: Allows a Druzynowy to view their registration
       parameters:
-        - in: path
-          name: druzynaId
+        - name: druzynaId
+          in: path
+          required: true
           schema:
             type: integer
-          required: true
+          description: The unique ID of the Druzyna.
       responses:
         '200':
-          description: Druzyna Rejestracja details
+          description: Druzyna registration
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Registration'
+                  $ref: '#/components/schemas/Rejestracje'
+        '404':
+          $ref: '#/components/responses/NotFound'
+
+  /api/v1/szczep/rejestracje/{szczepId}:
+    post:
+      operationId: postSzczepRejestracje
+      tags:
+        - rejestracje
+      summary: Register yearly details for a specific szczep
+      description: Allows a szczepowy to register or update the annual details for their druzyny
+      parameters:
+        - name: szczepId
+          in: path
+          required: true
+          schema:
+            type: integer
+          description: The unique ID of the szczep
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Rejestracje'
+      responses:
+        '201':
+          description: Szczep rejestracja created successfully
+        '404':
+          $ref: '#/components/responses/NotFound'
+    get:
+      operationId: getSzczepRejestracje
+      tags:
+        - rejestracje
+      summary: Get a list of all Druzyny registrations for a Szczep
+      description: Allows a Szczepowy to view all the annual registration details for their Druzyny.
+      parameters:
+        - name: szczepId
+          in: path
+          required: true
+          schema:
+            type: integer
+          description: The unique ID of the Szczep.
+      responses:
+        '200':
+          description: A list of Druzyny registrations for the specified Szczep
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Rejestracje'
+        '404':
+          $ref: '#/components/responses/NotFound'
+
+  /api/v1/hufiec/rejestracje/{hufiecId}:
+    post:
+      operationId: postHufiecRejestracje
+      tags:
+        - rejestracje
+      summary: Register yearly details for a specific hufiec
+      description: Allows a Hufcowy to register or update the annual details for their szczepy
+      parameters:
+        - name: hufiecId
+          in: path
+          required: true
+          schema:
+            type: integer
+          description: The unique ID of the hufiecId
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Rejestracje'
+      responses:
+        '201':
+          description: Hufiec rejestracja created successfully
+        '404':
+          $ref: '#/components/responses/NotFound'
+    get:
+      operationId: getHufiecRejestracje
+      tags:
+        - rejestracje
+      summary: Get a list of all Szczepy registrations for a Hufiec
+      description: Allows a Hufcowy to view all the annual registration details for their Szczepy.
+      parameters:
+        - name: hufiecId
+          in: path
+          required: true
+          schema:
+            type: integer
+          description: The unique ID of the Hufiec.
+      responses:
+        '200':
+          description: A list of Szczepy registrations for the specified Hufiec
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Rejestracje'
+        '404':
+          $ref: '#/components/responses/NotFound'
+  /api/v1/choragiew/rejestracje:
+    get:
+      operationId: getAllRejestracje
+      tags:
+        - rejestracje
+      summary: Get all Registrations for all Druzyny
+      description: Allows an admin to view all the registrations for all Druzyny across the system.
+      responses:
+        '200':
+          description: A list of all Druzyny registrations across all Szczepy and Hufce
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Rejestracje'
         '404':
           $ref: '#/components/responses/NotFound'
 
@@ -668,17 +594,60 @@ paths:
 
 components:
   schemas:
-    Registration:
+    Rejestracje:
       type: object
       properties:
-        status:
-          type: boolean
-          default: false
-        stats:
-          $ref: '#/components/schemas/Stats'
-        dataRej:
+        registrationId:
+          type: integer
+          description: Unique identifier for the registration.
+        druzynaId:
+          type: integer
+          description: ID of the associated Druzyna (troop), if applicable.
+        szczepId:
+          type: integer
+          description: ID of the associated Szczep, if applicable.
+        hufiecId:
+          type: integer
+          description: ID of the associated Hufiec, if applicable.
+        year:
+          type: integer
+          description: The year for which the registration applies.
+        submittedDate:
           type: string
-          format: date-time
+          format: date
+          description: Date when the registration was submitted.
+        status:
+          type: string
+          enum: [PENDING, APPROVED, REJECTED]
+          description: Current status of the registration.
+        comments:
+          type: string
+          maxLength: 500
+          description: Comments or notes about the registration.
+        updatedBy:
+          type: string
+          description: User who last updated the registration.
+        updatedAt:
+          type: string
+          format: date
+          description: Date when the registration was last updated.
+        totalParticipants:
+          type: integer
+          minimum: 0
+          description: Total number of participants in the troop for the year.
+        totalInstruktorzy:
+          type: integer
+          minimum: 0
+          description: Total number of instructors in the troop for the year.
+        totalZbiorki:
+          type: integer
+          minimum: 0
+          description: Total number of troop meetings (zbiorki) during the year.
+        totalWycieczki:
+          type: integer
+          minimum: 0
+          description: Total number of troop trips (wycieczki) during the year.
+
 
     PersonalDetails:
       type: object
@@ -831,20 +800,16 @@ components:
       properties:
         name:
           type: string
-        areaOfOperation:
-          type: string
-        personInCharge:
-          type: string
-    #        country:
-    #          type: string
-    #          enum: [ UK, Kanada, USA ]
-    #        komendant_choragwi:
-    #          type: integer
-    #        komenda_count:
-    #          type: integer
-    #        created_at:
-    #          type: string
-    #          format: date
+        country:
+            type: string
+            enum: [ UK, Kanada, USA ]
+        komendantChoragwi:
+          type: object
+          $ref: '#/components/schemas/Person'
+        hufce:
+          type: array
+          items:
+            $ref: '#/components/schemas/Hufiec'
 
     Hufiec:
       type: object
@@ -853,19 +818,13 @@ components:
           type: string
         areaOfOperation:
           type: string
-        personInCharge:
-          type: string
-    #        name:
-    #          type: string
-    #        choragiewId:
-    #          type: integer
-    #        in_charge:
-    #          type: integer
-    #        komenda_count:
-    #          type: integer
-    #        created_at:
-    #          type: string
-    #          format: date
+        hufcowy:
+          type: object
+          $ref: '#/components/schemas/Person'
+        szczepy:
+          type: array
+          items:
+            $ref: '#/components/schemas/Szczep'
 
     Szczep:
       type: object
@@ -874,23 +833,13 @@ components:
           type: string
         areaOfOperation:
           type: string
-        personInCharge:
-          type: string
-    #        name:
-    #          type: string
-    #        hufiecId:
-    #          type: integer
-    #        in_charge:
-    #          type: integer
-    #        druzyna_count:
-    #          type: integer
-    #        gromada_count:
-    #          type: integer
-    #        druzyna_wedrownikow_count:
-    #          type: integer
-    #        created_at:
-    #          type: string
-    #          format: date
+        szczepowy:
+          type: object
+          $ref: '#/components/schemas/Person'
+        druzyny:
+          type: array
+          items:
+            $ref: '#/components/schemas/Druzyna'
 
     Druzyna:
       type: object
@@ -917,27 +866,6 @@ components:
           type: object
           $ref: '#/components/schemas/Stats'
         yearEstablished:
-          type: string
-
-
-    Wedrownicy:
-      type: object
-      properties:
-        name:
-          type: string
-        areaOfOperation:
-          type: string
-        personInCharge:
-          type: string
-
-    Gromada:
-      type: object
-      properties:
-        name:
-          type: string
-        areaOfOperation:
-          type: string
-        personInCharge:
           type: string
 
     Person:
