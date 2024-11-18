@@ -18,5 +18,5 @@ public class ChoragiewEntity {
     @JoinColumn(name = "komendant_choragwi_id")
     private PersonEntity komendantChoragwi;
     @OneToMany(mappedBy = "choragiew", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<HufiecEntity> hufceList;
+    private List<HufiecEntity> hufce;
 }

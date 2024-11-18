@@ -15,4 +15,6 @@ public interface SzczepService {
     void updateSzczep(Integer szczepId, Szczep updatedSzczepDTO);
 
     void deleteSzczep(Integer szczepId);
+
+    void linkDruzynaToSzczep(Integer szczepId, Integer druzynaId);
 }

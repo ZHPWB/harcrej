@@ -99,6 +99,35 @@ paths:
         "404":
           $ref: "#/components/responses/NotFound"
 
+  /api/v1/choragiew/{choragiewId}/hufiec/{hufiecId}:
+    post:
+      tags:
+        - Choragiew
+      summary: Link a Hufiec to a Choragiew
+      description: Associates a specific Hufiec with a Choragiew.
+      operationId: linkHufiecToChoragiew
+      parameters:
+        - name: choragiewId
+          in: path
+          required: true
+          schema:
+            type: integer
+          description: The unique ID of the Choragiew to which the Hufiec will be linked.
+        - name: hufiecId
+          in: path
+          required: true
+          schema:
+            type: integer
+          description: The unique ID of the Hufiec to be linked to the Choragiew.
+      responses:
+        '200':
+          description: Hufiec successfully linked to Choragiew.
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+
+
   /api/v1/hufiec:
     post:
       tags:
@@ -189,6 +218,30 @@ paths:
           description: Hufiec updated successfully
         "404":
           $ref: "#/components/responses/NotFound"
+
+  /api/v1/hufiec/{hufiecId}/szczep/{szczepId}:
+    post:
+      tags:
+        - Hufiec
+      summary: Link a Szczep to a Hufiec
+      description: Associates a specific Szczep with a Hufiec.
+      operationId: linkSzczepToHufiec
+      parameters:
+        - name: hufiecId
+          in: path
+          required: true
+          schema:
+            type: integer
+          description: The unique ID of the Hufiec to which the Szczep will be linked.
+        - name: szczepId
+          in: path
+          required: true
+          schema:
+            type: integer
+          description: The unique ID of the Szczep to be linked to the Hufiec.
+      responses:
+        '200':
+          description: Szczep successfully linked to Hufiec.
 
   /api/v1/szczep:
     post:
@@ -371,6 +424,29 @@ paths:
           description: Druzyna updated successfully
         "404":
           $ref: "#/components/responses/NotFound"
+  /api/v1/szczep/{szczepId}/druzyna/{druzynaId}:
+    post:
+      tags:
+        - Szczep
+      summary: Link a Drużyna to a Szczep
+      description: Associates a specific Drużyna with a Szczep.
+      operationId: linkDruzynaToSzczep
+      parameters:
+        - name: szczepId
+          in: path
+          required: true
+          schema:
+            type: integer
+          description: The unique ID of the Szczep to which the Drużyna will be linked.
+        - name: druzynaId
+          in: path
+          required: true
+          schema:
+            type: integer
+          description: The unique ID of the Drużyna to be linked to the Szczep.
+      responses:
+        '200':
+          description: Drużyna successfully linked to Szczep.
 
 
   /api/v1/druzyna/rejestracje/{druzynaId}:
@@ -798,8 +874,6 @@ components:
     Choragiew:
       type: object
       properties:
-        name:
-          type: string
         country:
             type: string
             enum: [ UK, Kanada, USA ]
@@ -844,9 +918,6 @@ components:
     Druzyna:
       type: object
       properties:
-        szczepId:
-          type: integer
-          description: Identifier of the Szczep this Druzyna belongs to.
         name:
           type: string
         addressOfOperation:
@@ -871,16 +942,16 @@ components:
     Person:
       type: object
       properties:
-        first_name:
+        firstName:
           type: string
-        last_name:
+        lastName:
           type: string
         email:
           type: string
           format: email
         mobile:
           type: string
-        date_of_birth:
+        dateOfBirth:
           type: string
           format: date
         address:

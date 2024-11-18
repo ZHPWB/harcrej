@@ -3,9 +3,13 @@ package com.zhpwb.harcrej.service.impl;
 import com.zhpwb.harcrej.mapper.ChoragiewMapper;
 import com.zhpwb.harcrej.mapper.PersonMapper;
 import com.zhpwb.harcrej.model.Choragiew;
+import com.zhpwb.harcrej.model.ChoragiewEntity;
+import com.zhpwb.harcrej.model.HufiecEntity;
 import com.zhpwb.harcrej.respository.ChoragiewRepository;
+import com.zhpwb.harcrej.respository.HufiecRepository;
 import com.zhpwb.harcrej.respository.PersonRepository;
 import com.zhpwb.harcrej.service.ChoragiewService;
+import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -19,6 +23,7 @@ import java.util.List;
 public class ChoragiewServiceImpl implements ChoragiewService {
 
     private final ChoragiewRepository choragiewRepository;
+    private final HufiecRepository hufiecRepository;
     private final PersonRepository personRepository;
     private final ChoragiewMapper choragiewMapper;
     private final PersonMapper personMapper;
@@ -60,7 +65,7 @@ public class ChoragiewServiceImpl implements ChoragiewService {
 
             existingChoragiewEntity.setCountry(updatedEntity.getCountry());
             existingChoragiewEntity.setKomendantChoragwi(updatedEntity.getKomendantChoragwi());
-            existingChoragiewEntity.setHufceList(updatedEntity.getHufceList());
+            existingChoragiewEntity.setHufce(updatedEntity.getHufce());
 
             choragiewRepository.save(existingChoragiewEntity);
 
@@ -70,5 +75,19 @@ public class ChoragiewServiceImpl implements ChoragiewService {
     @Override
     public void deleteChoragiew(Integer choragiewId) {
         choragiewRepository.deleteById(choragiewId);
+    }
+
+    @Override
+    public void linkHufiecToChoragiew(Integer choragiewId, Integer hufiecId) {
+        ChoragiewEntity choragiew = choragiewRepository.findById(choragiewId)
+                .orElseThrow(() -> new EntityNotFoundException("Choragiew not found"));
+        HufiecEntity hufiec = hufiecRepository.findById(hufiecId)
+                .orElseThrow(() -> new EntityNotFoundException("Hufiec not found"));
+
+        hufiec.setChoragiew(choragiew);
+        choragiew.getHufce().add(hufiec);
+
+        hufiecRepository.save(hufiec);
+        choragiewRepository.save(choragiew);
     }
 }

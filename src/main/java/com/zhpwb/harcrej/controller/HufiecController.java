@@ -45,4 +45,10 @@ public class HufiecController implements HufiecApi {
         hufiecService.deleteHufiec(hufiecId);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
+
+    @Override
+    public ResponseEntity<Void> linkSzczepToHufiec(Integer hufiecId, Integer szczepId) {
+        hufiecService.linkSzczepToHufiec(hufiecId, szczepId);
+        return new ResponseEntity<>(HttpStatus.OK);
+    }
 }

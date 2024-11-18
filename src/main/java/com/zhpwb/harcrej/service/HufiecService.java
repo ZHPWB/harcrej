@@ -15,4 +15,7 @@ public interface HufiecService {
     void updateHufiec(Integer hufiecId, Hufiec updatedHufiecDTO);
 
     void deleteHufiec(Integer hufiecId);
+
+    void linkSzczepToHufiec(Integer hufiecId, Integer szczepId);
+
 }

@@ -14,4 +14,6 @@ public interface ChoragiewService {
     void updateChoragiew(Integer choragiewId, Choragiew updatedChoragiewDTO);
 
     void deleteChoragiew(Integer choragiewId);
+
+    void linkHufiecToChoragiew(Integer choragiewId, Integer hufiecId);
 }

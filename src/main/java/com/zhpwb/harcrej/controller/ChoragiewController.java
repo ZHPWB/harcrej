@@ -47,5 +47,11 @@ public class ChoragiewController implements ChoragiewApi {
         choragiewService.deleteChoragiew(choragiewId);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
+
+    @Override
+    public ResponseEntity<Void> linkHufiecToChoragiew(Integer choragiewId, Integer hufiecId) {
+        choragiewService.linkHufiecToChoragiew(choragiewId, hufiecId);
+        return new ResponseEntity<>(HttpStatus.OK);
+    }
 }
 

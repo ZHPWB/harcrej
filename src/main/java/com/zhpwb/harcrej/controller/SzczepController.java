@@ -45,4 +45,10 @@ public class SzczepController implements SzczepApi {
         szczepService.deleteSzczep(szczepId);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
+
+    @Override
+    public ResponseEntity<Void> linkDruzynaToSzczep(Integer szczepId, Integer druzynaId) {
+        szczepService.linkDruzynaToSzczep(szczepId, druzynaId);
+        return new ResponseEntity<>(HttpStatus.OK);
+    }
 }

@@ -1,9 +1,13 @@
 package com.zhpwb.harcrej.service.impl;
 
 import com.zhpwb.harcrej.mapper.SzczepMapper;
+import com.zhpwb.harcrej.model.DruzynaEntity;
 import com.zhpwb.harcrej.model.Szczep;
+import com.zhpwb.harcrej.model.SzczepEntity;
+import com.zhpwb.harcrej.respository.DruzynaRepository;
 import com.zhpwb.harcrej.respository.SzczepRepository;
 import com.zhpwb.harcrej.service.SzczepService;
+import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -16,6 +20,7 @@ import java.util.List;
 public class SzczepServiceImpl implements SzczepService {
 
     private final SzczepRepository szczepRepository;
+    private final DruzynaRepository druzynaRepository;
     private final SzczepMapper szczepMapper;
 
     @Override
@@ -55,5 +60,23 @@ public class SzczepServiceImpl implements SzczepService {
     @Override
     public void deleteSzczep(Integer szczepId) {
         szczepRepository.deleteById(szczepId);
+    }
+
+    @Override
+    public void linkDruzynaToSzczep(Integer szczepId, Integer druzynaId) {
+        SzczepEntity szczep = szczepRepository.findById(szczepId)
+                .orElseThrow(() -> new EntityNotFoundException("Szczep not found"));
+        DruzynaEntity druzyna = druzynaRepository.findById(druzynaId)
+                .orElseThrow(() -> new EntityNotFoundException("Drużyna not found"));
+
+        if (szczep.getDruzyny().size() >= 3) {
+            throw new IllegalStateException("A Szczep can only have up to 3 Drużyny.");
+        }
+
+        druzyna.setSzczep(szczep);
+        szczep.getDruzyny().add(druzyna);
+
+        druzynaRepository.save(druzyna);
+        szczepRepository.save(szczep);
     }
 }
