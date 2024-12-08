@@ -1,0 +1,29 @@
+spring:
+  application:
+    name: harcrej
+  datasource:
+    url: jdbc:mysql://localhost:3306/harcrej
+    username:
+    password:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+  jpa:
+    database-platform: org.hibernate.dialect.MySQL8Dialect
+    show-sql: true
+    hibernate:
+      ddl-auto: update
+  banner:
+    location: classpath:banner.txt
+
+application:
+  title: Harcrej
+  security:
+    jwt:
+      secret-key:
+      expiration: 86400000 # 1 day
+      refresh-token:
+        expiration: 604800000 # a week
+logging:
+  level:
+    org.springframework.security: DEBUG
+
+

@@ -17,7 +17,7 @@ public class SzczepEntity {
     private String areaOfOperation;
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "szczepowy_id")
-    private PersonEntity szczepowy;
+    private UserEntity szczepowy;
     @OneToMany(mappedBy = "szczep")
     private List<DruzynaEntity> druzyny;
     @ManyToOne

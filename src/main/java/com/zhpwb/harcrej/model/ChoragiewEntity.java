@@ -16,7 +16,7 @@ public class ChoragiewEntity {
     private CountryEntity country;
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "komendant_choragwi_id")
-    private PersonEntity komendantChoragwi;
+    private UserEntity komendantChoragwi;
     @OneToMany(mappedBy = "choragiew", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<HufiecEntity> hufce;
 }

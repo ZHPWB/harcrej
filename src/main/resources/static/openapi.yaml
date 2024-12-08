@@ -615,28 +615,28 @@ paths:
         '404':
           $ref: '#/components/responses/NotFound'
 
-  /api/v1/person:
+  /api/v1/user:
     post:
       tags:
-        - person
-      summary: Create a new Person
-      operationId: postPerson
+        - user
+      summary: Create a new User
+      operationId: postUser
       requestBody:
         required: true
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/Person'
+              $ref: '#/components/schemas/User'
       responses:
         '201':
-          description: Person created successfully
+          description: User created successfully
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Person'
+                $ref: '#/components/schemas/User'
     get:
       tags:
-        - person
+        - user
       summary: Get a list of all people
       operationId: getListOfPeople
       responses:
@@ -647,11 +647,11 @@ paths:
               schema:
                 type: array
                 items:
-                  $ref: '#/components/schemas/Person'
+                  $ref: '#/components/schemas/User'
 
   /api/v1/role-assignment:
     post:
-      summary: Assign a role to a person
+      summary: Assign a role to a user
       operationId: postRoleAssignment
       requestBody:
         required: true
@@ -725,7 +725,7 @@ components:
           description: Total number of troop trips (wycieczki) during the year.
 
 
-    PersonalDetails:
+    UseralDetails:
       type: object
       properties:
         hufiec:
@@ -879,7 +879,7 @@ components:
             enum: [ UK, Kanada, USA ]
         komendantChoragwi:
           type: object
-          $ref: '#/components/schemas/Person'
+          $ref: '#/components/schemas/User'
         hufce:
           type: array
           items:
@@ -894,7 +894,7 @@ components:
           type: string
         hufcowy:
           type: object
-          $ref: '#/components/schemas/Person'
+          $ref: '#/components/schemas/User'
         szczepy:
           type: array
           items:
@@ -909,7 +909,7 @@ components:
           type: string
         szczepowy:
           type: object
-          $ref: '#/components/schemas/Person'
+          $ref: '#/components/schemas/User'
         druzyny:
           type: array
           items:
@@ -925,21 +925,21 @@ components:
           $ref: '#/components/schemas/Address'
         druzynowy:
           type: object
-          $ref: '#/components/schemas/Person'
+          $ref: '#/components/schemas/User'
         type:
           type: string
           enum: [ harcerze, wedrownicy, zuchy ]
         komenda:
           type: array
           items:
-            $ref: '#/components/schemas/Person'
+            $ref: '#/components/schemas/User'
         currentStats:
           type: object
           $ref: '#/components/schemas/Stats'
         yearEstablished:
           type: string
 
-    Person:
+    User:
       type: object
       properties:
         firstName:
@@ -965,7 +965,7 @@ components:
       properties:
         role_assignmentId:
           type: integer
-        personId:
+        userId:
           type: integer
         unitId:
           type: integer

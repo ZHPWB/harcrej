@@ -24,10 +24,9 @@ public class DruzynaEntity {
     private Address addressOfOperation;
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "druzynowy_id")  // Foreign key for PersonEntity (druzynowy)
-    private PersonEntity druzynowy;
+    private UserEntity druzynowy;
     private TypeDto type;
-    @OneToMany(cascade = CascadeType.ALL)
-    private List<PersonEntity> komenda;
+    private List<UserEntity> komenda;
     @Embedded
     private StatsDto currentStats;
     private String yearEstablished;

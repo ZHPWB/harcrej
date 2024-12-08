@@ -19,7 +19,7 @@ public class HufiecEntity {
 
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "hufcowy_id")
-    private PersonEntity hufcowy;
+    private UserEntity hufcowy;
 
     // This maps to the "hufiec" field in SzczepEntity
     @OneToMany(mappedBy = "hufiec", cascade = CascadeType.ALL, orphanRemoval = true)

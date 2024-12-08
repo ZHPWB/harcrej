@@ -3,10 +3,10 @@ package com.zhpwb.harcrej.service.impl;
 import com.zhpwb.harcrej.mapper.DruzynaMapper;
 import com.zhpwb.harcrej.mapper.PersonMapper;
 import com.zhpwb.harcrej.model.Druzyna;
-import com.zhpwb.harcrej.model.Person;
-import com.zhpwb.harcrej.model.PersonEntity;
+import com.zhpwb.harcrej.model.User;
+import com.zhpwb.harcrej.model.UserEntity;
 import com.zhpwb.harcrej.respository.DruzynaRepository;
-import com.zhpwb.harcrej.respository.PersonRepository;
+import com.zhpwb.harcrej.respository.UserRepository;
 import com.zhpwb.harcrej.service.DruzynaService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -22,7 +22,7 @@ import java.util.List;
 public class DruzynaServiceImpl implements DruzynaService {
 
     private final DruzynaRepository druzynaRepository;
-    private final PersonRepository personRepository;
+    private final UserRepository userRepository;
     private final DruzynaMapper druzynaMapper;
     private final PersonMapper personMapper;
 
@@ -34,21 +34,21 @@ public class DruzynaServiceImpl implements DruzynaService {
         if (druzyna.getDruzynowy() != null) {
             var druzynowyEntity = personMapper.mapToEntity(druzyna.getDruzynowy());
 
-            if (druzynowyEntity.getPersonId() == null) {
-                personRepository.save(druzynowyEntity);
+            if (druzynowyEntity.getUserId() == null) {
+                userRepository.save(druzynowyEntity);
             }
             druzynaEntity.setDruzynowy(druzynowyEntity);
         }
 
         if (druzyna.getKomenda() != null) {
-            List<PersonEntity> komendaEntities = new ArrayList<>();
-            for (Person person : druzyna.getKomenda()) {
-                PersonEntity personEntity = personMapper.mapToEntity(person);
+            List<UserEntity> komendaEntities = new ArrayList<>();
+            for (User user : druzyna.getKomenda()) {
+                UserEntity userEntity = personMapper.mapToEntity(user);
 
-                if (personEntity.getPersonId() == null) {
-                    personRepository.save(personEntity);
+                if (userEntity.getUserId() == null) {
+                    userRepository.save(userEntity);
                 }
-                komendaEntities.add(personEntity);
+                komendaEntities.add(userEntity);
             }
             druzynaEntity.setKomenda(komendaEntities);
         }

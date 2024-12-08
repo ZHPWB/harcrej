@@ -1,7 +1,7 @@
 package com.zhpwb.harcrej.mapper;
 
-import com.zhpwb.harcrej.model.Person;
-import com.zhpwb.harcrej.model.PersonEntity;
+import com.zhpwb.harcrej.model.User;
+import com.zhpwb.harcrej.model.UserEntity;
 import org.mapstruct.Mapper;
 import org.mapstruct.NullValuePropertyMappingStrategy;
 import org.mapstruct.ReportingPolicy;
@@ -10,7 +10,7 @@ import org.mapstruct.ReportingPolicy;
         nullValuePropertyMappingStrategy = NullValuePropertyMappingStrategy.IGNORE)
 public interface PersonMapper {
 
-    Person mapToPerson(PersonEntity personEntity);
+    User mapToPerson(UserEntity userEntity);
 
-    PersonEntity mapToEntity(Person person);
+    UserEntity mapToEntity(User person);
 }

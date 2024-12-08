@@ -7,7 +7,7 @@ import com.zhpwb.harcrej.model.ChoragiewEntity;
 import com.zhpwb.harcrej.model.HufiecEntity;
 import com.zhpwb.harcrej.respository.ChoragiewRepository;
 import com.zhpwb.harcrej.respository.HufiecRepository;
-import com.zhpwb.harcrej.respository.PersonRepository;
+import com.zhpwb.harcrej.respository.UserRepository;
 import com.zhpwb.harcrej.service.ChoragiewService;
 import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
@@ -24,7 +24,7 @@ public class ChoragiewServiceImpl implements ChoragiewService {
 
     private final ChoragiewRepository choragiewRepository;
     private final HufiecRepository hufiecRepository;
-    private final PersonRepository personRepository;
+    private final UserRepository userRepository;
     private final ChoragiewMapper choragiewMapper;
     private final PersonMapper personMapper;
 
@@ -36,8 +36,8 @@ public class ChoragiewServiceImpl implements ChoragiewService {
         if (choragiew.getKomendantChoragwi() != null) {
             var komendantChoragwiEntity = personMapper.mapToEntity(choragiew.getKomendantChoragwi());
 
-            if (komendantChoragwiEntity.getPersonId() == null) {
-                personRepository.save(komendantChoragwiEntity);
+            if (komendantChoragwiEntity.getUserId() == null) {
+                userRepository.save(komendantChoragwiEntity);
             }
             choragiewEntity.setKomendantChoragwi(komendantChoragwiEntity);
         }
