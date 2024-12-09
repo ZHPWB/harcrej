@@ -2,6 +2,7 @@ package com.zhpwb.harcrej.auth;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.zhpwb.harcrej.config.JwtService;
+import com.zhpwb.harcrej.exception.UserAlreadyExistsException;
 import com.zhpwb.harcrej.model.Role;
 import com.zhpwb.harcrej.model.UserEntity;
 import com.zhpwb.harcrej.respository.TokenRepository;
@@ -11,6 +12,7 @@ import com.zhpwb.harcrej.token.TokenType;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpHeaders;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -22,6 +24,7 @@ import java.io.IOException;
 
 @Service
 @RequiredArgsConstructor
+@Slf4j
 public class AuthenticationService {
 
     private final UserRepository userRepository;
@@ -38,6 +41,12 @@ public class AuthenticationService {
                 .password(passwordEncoder.encode(request.getPassword()))
                 .role(Role.UNASSIGNED)
                 .build();
+
+        if (checkIfUserExists(user)) {
+            log.info("User already exist with email: {}", request.getEmail());
+            throw new UserAlreadyExistsException("User already exist with email: " + request.getEmail());
+        }
+
         var savedUser = userRepository.save(user);
         var jwtToken = jwtService.generateToken(user);
         var refreshToken = jwtService.generateRefreshToken(user);
@@ -120,8 +129,13 @@ public class AuthenticationService {
                         .accessToken(accessToken)
                         .refreshToken(refreshToken)
                         .build();
-                new ObjectMapper().writeValue(response.getOutputStream(),authResponse);
+                new ObjectMapper().writeValue(response.getOutputStream(), authResponse);
             }
         }
+    }
+
+    private boolean checkIfUserExists(UserEntity user) {
+        return userRepository.findByEmail(user.getEmail())
+                .isPresent();
     }
 }
